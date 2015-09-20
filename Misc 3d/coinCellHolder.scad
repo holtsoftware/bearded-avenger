@@ -1,19 +1,19 @@
 module coinCellHolder()
 {
+    translate([14,2,1.2]) union()
+{
+cube([0.4,2,0.4]);
+translate([0,0.8,-0.8]) cube([0.4,0.4,2]);
+}
 difference()
 {
-cube([14,24,12]);
+cube([14,24,8]);
 
-color("blue") translate([0,9.5,3.4]) cube([30,5,3.5]);
-union()
-{
-color("orange") translate([-5,9.5,6.5]) cube([30,5,4]);
-color("orange") translate([-5,7,8.5]) cube([30,10,2.5]);
-}
+color("blue") translate([0,9.5,2.4]) cube([31,5,4]);
 
 
-color("green") translate([12,12,4.1]) cylinder(d=22,h=2.75,$fn=1000);
-color("red") translate([12,1,4.1]) cube([10,22,2.75]);
+color("green") translate([12,12,3.1]) cylinder(d=22,h=2.75,$fn=1000);
+color("red") translate([12,1,3.1]) cube([10,22,2.75]);
+    color("purple") translate([13.5,9.5,]) cube([0.5,5,8]);
 }
 }
-
