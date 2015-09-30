@@ -3,8 +3,9 @@ module box()
 {
     difference()
     {
+        wallSize=1.2;
         cube([82,82,60]);
-        translate([1.4,-4,2]) cube([79.2,84.4,59]);
+        translate([wallSize,0,2]) cube([82-(wallSize*2),82-wallSize,59]);
     }
 }
 
@@ -14,7 +15,7 @@ module spacer(){
         translate([-10,-4.5,1]) cube([20,9,11.75]);
     holes();
 
-    color("green") translate([-1.5,-5,11.75]) cube([3,10,3]);
+    color("green") translate([-1.5,-5,0.75]) cube([3,10,20]);
     }
 }
 
@@ -36,7 +37,11 @@ module toSubtract(){
 
 module detector()
 {
-    translate([0,-1,0]) cube([20.25,2,0.5]);
+    difference()
+    {
+        translate([0,-1,0]) cube([20.25,2,10]);
+        translate([0,-1,0]) cube([19,2,10]);
+    }
 }
 
 module detectorComplete()
@@ -57,6 +62,6 @@ box();
 translate([40,60,0]) completespacer();
 }
 translate([40,60,0]) toSubtract();
-translate([40,60,0]) color("purple") detectorComplete();
+translate([40,60,0]) detectorComplete();
 }
 
