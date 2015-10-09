@@ -10,7 +10,7 @@ using System.Threading;
 
 namespace mp4FileFixer
 {
-	class Program
+	public class Program
 	{
 		public static Regex regex = new Regex(
 	  "((?<season>\\d{1,2})?_(?<episode>\\d{1,3})(?<name>.*)|(?<epi" +
@@ -19,7 +19,7 @@ namespace mp4FileFixer
 	RegexOptions.CultureInvariant
 	| RegexOptions.Compiled
 	);
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			var arguments = new Sannel.Arguments(args);
 			var show = (arguments.HasArgument("showname")) ? arguments.ArgumentValue("showname") : "";
@@ -41,7 +41,7 @@ namespace mp4FileFixer
 			}
 		}
 
-		static void ProcessDirectory(DirectoryInfo di, String subFolder, String show)
+		public static void ProcessDirectory(DirectoryInfo di, String subFolder, String show)
 		{
 			foreach(var dir in di.GetDirectories())
 			{
