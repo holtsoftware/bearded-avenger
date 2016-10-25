@@ -9,10 +9,10 @@ namespace TalkingWall
 {
 	public class App : Application
 	{
-		public App ()
+		public App (ILoginStore store, ISettingsStore setting)
 		{
 			// The root page of your application
-			MainPage = new StartPage();
+			MainPage = new StartPage(store, setting);
 		}
 
 		protected override void OnStart ()

@@ -17,7 +17,7 @@ namespace TalkingWall.Droid
 			base.OnCreate (bundle);
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
-			LoadApplication (new TalkingWall.App ());
+			LoadApplication (new TalkingWall.App (new AndroidLoginStore(BaseContext), new AndroidSettingsStore()));
 		}
 	}
 }

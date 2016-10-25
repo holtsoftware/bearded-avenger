@@ -16362,7 +16362,7 @@
       ]
     },
     "ParticleNET.ParticleSDK/0.8.17-beta-0042": {
-      "sha512": "F3eRafWr8h3MFcK45pg+D2io+AwfqP8g1FvQitfPBM6QadnwaDwYfFf3zBKu0P3qhm9UUFE7rbOut5j4zNq0UQ==",
+      "sha512": "bXYZ9bpJAulVpYjMNchGHHpMlFrJ1V0sFriX1FRXXesFSpwXjwUA7Rq5N6RjKGlsmRXkZuhJaJQLqiyLhqidUA==",
       "type": "package",
       "path": "ParticleNET.ParticleSDK/0.8.17-beta-0042",
       "files": [
@@ -22248,7 +22248,7 @@
       ]
     },
     "Xamarin.Forms/2.3.2.127": {
-      "sha512": "5f//6Ot/zh9Rg9QksTKTA8iH5h+9GMLfA0M6aS9dVRq26ChIwmZlBCk6EETGQVSDx+yHZ5h/WHYfnwU08IriMg==",
+      "sha512": "NYH2p6Z2QGrRZpRXSiLqtapqlsx11pkViEIjDUQFDvsMCZbvsipDXOWjV9sXTrruXTdkNZ24Nsw0lEG0jVRMjA==",
       "type": "package",
       "path": "Xamarin.Forms/2.3.2.127",
       "files": [

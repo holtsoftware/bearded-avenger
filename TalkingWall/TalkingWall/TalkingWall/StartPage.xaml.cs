@@ -11,10 +11,27 @@ namespace TalkingWall
 {
 	public partial class StartPage : ContentPage
 	{
-		public StartPage ()
+		private ILoginStore store;
+		private ISettingsStore setting;
+
+		public StartPage (ILoginStore store, ISettingsStore setting)
 		{
+			this.store = store;
+			this.setting = setting;
 			InitializeComponent ();
 			BindingContext = this;
+
+			if (store.HasLogin)
+			{
+				var data = store.GetLoginInfo();
+				Username = data.Item1;
+				Password = data.Item2;
+				OnPropertyChanged(nameof(Username));
+				OnPropertyChanged(nameof(Password));
+			}
+
+			DeviceId = setting.DeviceId;
+			OnPropertyChanged(nameof(DeviceId));
 		}
 
 		public String Username { get; set; }
@@ -37,19 +54,40 @@ namespace TalkingWall
 			}
 		}
 
+		private bool isBusy = false;
+		public bool LocalIsBusy
+		{
+			get
+			{
+				return isBusy;
+			}
+			set
+			{
+				if(isBusy != value)
+				{
+					isBusy = value;
+					OnPropertyChanged(nameof(LocalIsBusy));
+				}
+			}
+		}
+
 		private async void buttonClicked(object sender, EventArgs e)
 		{
+			LocalIsBusy = true;
 			using(var cloud = new Particle.ParticleCloud())
 			{
 				var result = await cloud.LoginWithUserAsync(Username, Password);
 				if (result.Success)
 				{
+					store.SaveLogin(Username, Password);
 					var devices = await cloud.GetDevicesAsync();
 					if (devices.Success)
 					{
 						var first = devices.Data.FirstOrDefault(i => String.Compare(i.Id, DeviceId) == 0);
 						if(first != null)
 						{
+							setting.DeviceId = first.Id;
+
 							var fixedMessage = String.Empty;
 							foreach(var c in message.ToLower())
 							{
@@ -63,12 +101,20 @@ namespace TalkingWall
 							if (ret.Success)
 							{
 								await DisplayAlert("Success", "Message sent", "Ok");
+								LocalIsBusy = false;
 								return;
 							}
+						}
+						else
+						{
+							await DisplayAlert("Error", "Device Not found", "Ok");
+							LocalIsBusy = false;
+							return;
 						}
 					}
 				}
 				await DisplayAlert("Error", "Unable to send message", "Ok");
+				LocalIsBusy = false;
 			}
 		}
 	}

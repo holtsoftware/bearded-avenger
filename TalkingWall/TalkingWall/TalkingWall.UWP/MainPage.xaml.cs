@@ -21,7 +21,7 @@ namespace TalkingWall.UWP
 		{
 			this.InitializeComponent();
 
-			LoadApplication(new TalkingWall.App());
+			LoadApplication(new TalkingWall.App(new WindowsLoginStore(), new WindowsSettingStore()));
 		}
 	}
 }
