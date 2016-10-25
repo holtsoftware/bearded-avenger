@@ -1,0 +1,2 @@
+MainPackage=C:\Source\Sannel\bearded-avenger\TalkingWall\TalkingWall\TalkingWall.UWP\bin\x86\Debug\TalkingWall.UWP_1.0.1.0_x86_Debug.appx
+SymbolPackage=C:\Source\Sannel\bearded-avenger\TalkingWall\TalkingWall\TalkingWall.UWP\AppPackages\TalkingWall.UWP_1.0.1.0_Debug_Test\TalkingWall.UWP_1.0.1.0_x86_Debug.appxsym
