@@ -23,7 +23,7 @@ namespace TalkingWall.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-			LoadApplication (new TalkingWall.App ());
+			LoadApplication (new TalkingWall.App (new LoginStore(), new SettingsStore()));
 
 			return base.FinishedLaunching (app, options);
 		}
