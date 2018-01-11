@@ -26,7 +26,7 @@ module mainCube()
 	{
 		union()
 		{
-			translate([outerWidth/2,outerWidth/2,0]) cylinder(d=outerWidth,3);
+			translate([outerWidth/2,outerWidth/2,0]) cylinder(d=outerWidth,2);
 		}
 		
 		
