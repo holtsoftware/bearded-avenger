@@ -6,6 +6,7 @@
 class Ring{
 public:
     int Leds[4];
+    bool IsVertual=false;
     bool Skip=false;
     void AddRing(Adafruit_NeoPixel &strip, uint32_t c){
         if(!Skip){
