@@ -1,5 +1,7 @@
 $fn=500;
 
+module bottom()
+{
 difference()
 {
 	cube([76,145,15]);
@@ -28,3 +30,19 @@ translate([3,3,0]) difference()
 	cylinder(d=5,h=15);
 	cylinder(d=2.5,h=16);
 }
+}
+
+module top()
+{
+	difference()
+	{
+		cube([76,145,3]);
+		translate([70,140,0]) cylinder(d=3.5,h=16);
+translate([70,5,0]) cylinder(d=3.5,h=16);
+translate([5,140,0]) cylinder(d=3.5,h=16);
+		
+	translate([3,3,0]) cylinder(d=3.5,h=16);
+	}
+}
+
+top();

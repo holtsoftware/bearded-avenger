@@ -1,10 +1,10 @@
 $fn=500;
 module peg()
 {
-	translate([3.75,3.75,0]) union()
+	translate([3.75,3.75,-10]) union()
 	{
-		cylinder(d=4,h=3.5,center=false);
-		translate([0,0,3.5]) cylinder(d1=5,d2=7.5,h=2.5,center=false);
+		cylinder(d=2.5,h=10,center=false);
+		//translate([0,0,3.5]) cylinder(d1=5,d2=7.5,h=2.5,center=false);
 	}
 }
 
@@ -36,12 +36,13 @@ union()
 cube([13,73,10]);
 cube([150,13,10]);
 translate([147.5,0,0]) cube([13,73,10]);
-translate([3,51.5,10]) peg();
-translate([150,51.5,10]) peg();
+
 
 translate([45,0,0]) rotate([0,0,40]) cube([13,70,10]);
 translate([105.5,10,0]) rotate([0,0,-40]) cube([13,70,10]);
 }
+translate([3,51.5,10]) peg();
+translate([150,51.5,10]) peg();
 }
 
 rod();
