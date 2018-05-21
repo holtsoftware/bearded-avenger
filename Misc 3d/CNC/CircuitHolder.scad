@@ -3,6 +3,9 @@
 $yOffset=77.5;
 $xOffset=75.5;
 
+function getCircuitHolderX() = $xOffset;
+function getCircuitHolderY() = $yOffset;
+
 module circuitHole()
 {
 	difference()

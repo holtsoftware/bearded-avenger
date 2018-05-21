@@ -1,20 +1,20 @@
-$fn=500;
-module screwHole()
+$powerHoleX=151;
+$powerHoleY=25;
+
+module powerScrewHole()
 {
-	translate([0,0,-1]) cylinder(d=4.5,h=4);
+	translate([0,0,-1]) cylinder(d=4.5,h=10);
 }
+
+function getPowerHoleX() = $powerHoleX;
+function getPowerHoleY() = $powerHoleY;
 
 module powerHoles()
 {
-	screwHole();
-	translate([0,25,0]) screwHole();
-	translate([151,0,0]) screwHole();
-	translate([151,25,0]) screwHole();
+	powerScrewHole();
+	translate([0,$powerHoleY,0]) powerScrewHole();
+	translate([$powerHoleX,0,0]) powerScrewHole();
+	translate([$powerHoleX,$powerHoleY,0]) powerScrewHole();
 }
 
-difference()
-{
-	cube([175,40,1]);
-	translate([5,5,0]) powerHoles();
-	
-}
+powerHoles();
