@@ -1,26 +1,32 @@
 
 
 $fn=500;
-$wallThickness=4;
-$xSize=18;
-$ySize=14;
-$zSize=26;
+$xWallThickness=4;
+$yWallThickness=2;
+$xSize=19;
+$ySize=15;
+$zSize=20;
 $rodD=8;
 $screwSize=2.3;
 $screwSeperator=9.5;
 
-difference()
+module holes($size=$screwSize)
 {
-	cube([$xSize+($wallThickness*2),$ySize+($wallThickness*2),$zSize+$wallThickness]);
-	translate([$wallThickness,$wallThickness,$wallThickness]) cube([$xSize,$ySize,$zSize]);
-	translate([($xSize/2)+$wallThickness,-1,14]) rotate([-90,0,0]) cylinder(d=$rodD,h=$zSize);
-	translate([($xSize/2),-1,14]) cube([$rodD, $ySize+10,$zSize-10]);
-	translate([-1,$ySize+($wallThickness*2)-9,5]) union()
+	union()
 	{
-		rotate([0,90,0]) cylinder(d=2.3,h=$wallThickness*2);
-		translate([0,0,$screwSeperator]) rotate([0,90,0]) cylinder(d=2.3,h=$wallThickness*2);
+		rotate([0,90,0]) cylinder(d=$size,h=$zSize+($xWallThickness*2));
+		translate([0,0,$screwSeperator]) rotate([0,90,0]) cylinder(d=$size,h=$zSize+($xWallThickness*2));
 	}
 }
 
-
+difference()
+{
+	cube([$xSize+($xWallThickness*2),$ySize+($yWallThickness*2),$zSize+$yWallThickness]);
+	translate([$xWallThickness,$yWallThickness,$yWallThickness]) cube([$xSize,$ySize,$zSize]);
+	translate([($xSize/2)+$xWallThickness,-1,14]) rotate([-90,0,0]) cylinder(d=$rodD,h=$zSize);
+	translate([($xSize/2),-1,14]) cube([$rodD, $ySize+10,$zSize-10]);
+	translate([-1,$ySize+($yWallThickness*2)-9,5]) holes();
+	translate([$xSize*0.3,-1,5]) rotate([0,0,90]) holes();
+	translate([$xSize*1.1,-1,5]) rotate([0,0,90]) holes();
+}
 

@@ -1,7 +1,6 @@
 use <PowerHoles.scad>;
 use <Bottom.scad>;
 use <Piller.scad>;
-$fn=500;
 
 module smallWall()
 {
