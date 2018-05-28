@@ -1,6 +1,6 @@
 use <Bottom.scad>;
 
-//$fn=500;
+$fn=500;
 
 module topAttachHole(bottomZ)
 {
@@ -11,8 +11,8 @@ module topAttachHole(bottomZ)
 module topBase(bottomZ)
 {
 	cube([getBottomX(),getBottomY()/2,bottomZ]);
-	translate([getWallThickness(),getWallThickness(),0]) cube([getPillerThickness(),(getBottomY()/2)-getWallThickness(),getPillerThickness()]);
-	translate([getBottomX()-getPillerThickness()-getWallThickness()+0.05,getWallThickness(),0]) cube([getPillerThickness()-0.05,(getBottomY()/2)-getWallThickness(),getPillerThickness()]);
+	translate([getWallThickness(),getWallThickness(),0]) cube([getWallThickness(),(getBottomY()/2)-getWallThickness(),getPillerThickness()]);
+	translate([getBottomX()-getPillerThickness()+getWallThickness(),getWallThickness(),0]) cube([getWallThickness(),(getBottomY()/2)-getWallThickness(),getPillerThickness()]);
 	translate([getWallThickness(),getWallThickness(),0]) cube([getBottomX()-(getWallThickness()*2),getPillerThickness(),getPillerThickness()]);
 }
 
