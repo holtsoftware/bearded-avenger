@@ -23,9 +23,9 @@ module rod()
 {
 difference()
 {
-cube([13,5,60]);
-translate([6.5,-0.5,22]) rotate([-90,0,0]) cylinder(d=4,h=6);
-translate([6.5,3,22]) rotate([-90,0,0]) cylinder(d=9,h=5);
+	cube([13,10,60]);
+	translate([6.5,-0.5,22]) rotate([-90,0,0]) #cylinder(d=4,h=10);
+	translate([6.5,3,22]) rotate([-90,0,0]) #cylinder(d=9,h=7);
 }
 }
 // 139 31.5
@@ -33,16 +33,16 @@ difference()
 {
 union()
 {
-cube([13,73,10]);
+translate([0,5,0]) cube([13,73,10]);
 cube([150,13,10]);
-translate([147.5,0,0]) cube([13,73,10]);
+translate([147.5,5,0]) cube([13,73,10]);
 
 
 translate([45,0,0]) rotate([0,0,40]) cube([13,70,10]);
 translate([105.5,10,0]) rotate([0,0,-40]) cube([13,70,10]);
 }
-translate([3,51.5,10]) peg();
-translate([150,51.5,10]) peg();
+translate([3,56.5,10]) peg();
+translate([150,56.5,10]) peg();
 }
 
 rod();
