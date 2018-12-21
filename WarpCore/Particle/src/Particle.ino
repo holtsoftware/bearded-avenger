@@ -1,6 +1,7 @@
 #include "neopixel.h"
 #include "Particle.h"
 #include "WarpCoreManager.h"
+#define PARTICLE_USING_DEPRECATED_API
 
 
 SYSTEM_MODE(AUTOMATIC);
@@ -15,7 +16,7 @@ Adafruit_NeoPixel strip(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE);
 WarpCoreManager manager;
 
 int setWarp(String command) {
-    if(command == "11"){
+    if(command == "11" || command == "-1" || command == "Off"){
         manager.SetWarp(Warps::Off);
         return 11;
     }
@@ -69,6 +70,25 @@ int setWarp(String command) {
 void setup() {
     // Put initialization like pinMode and begin functions here.
     Particle.function("SetWarp", setWarp);
+
+    byte mac[6]; // the MAC address of your Wifi shield
+
+    WiFi.macAddress(mac);
+    char buf[2];
+    String message = String(itoa(mac[0],buf, 16));
+    message += ":";
+    message += itoa(mac[1], buf, 16);
+    message += ":";
+    message += itoa(mac[2], buf, 16);
+    message += ":";
+    message += itoa(mac[3], buf, 16);
+    message += ":";
+    message += itoa(mac[4], buf, 16);
+    message += ":";
+    message += itoa(mac[5], buf, 16);
+
+    Particle.publish("mac", message);
+
     strip.setBrightness(255);
     strip.begin();
     strip.show(); // Initialize all pixels to 'off'
