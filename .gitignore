@@ -174,5 +174,6 @@ UpgradeLog*.htm
 FakesAssemblies/
 /TalkingWall/.vs/config
 /.vs
-/.vs
+.vs/
 /Misc 3d/CNC/.vs
+.vscode/
