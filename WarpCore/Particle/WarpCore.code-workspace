@@ -5,7 +5,8 @@
         "files.associations": {
             "*.ino": "cpp"
         },
-        "editor.insertSpaces": false
+        "editor.insertSpaces": false,
+        "particle.targetDevice": "WarpCoreWork"
     },
     "folders": [
         {
