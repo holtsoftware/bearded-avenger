@@ -26,7 +26,8 @@ enum Warps
     Eight=8,
     Nine=9,
     Ten=10,
-    Off=11
+    Off=11,
+    Breach=12
 };
 
 class WarpCoreManager{

@@ -61,6 +61,11 @@ int setWarp(String command) {
         manager.SetWarp(Warps::One);
         return 1;
     }
+    else if(command == "12")
+    {
+        manager.SetWarp(Warps::Breach);
+        return 12;
+    }
     else{
         manager.SetWarp(Warps::Idle);
         return 0;

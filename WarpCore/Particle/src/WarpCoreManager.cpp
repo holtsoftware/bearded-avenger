@@ -41,6 +41,12 @@ WarpCoreManager::WarpCoreManager(){
 void WarpCoreManager::SetWarp(Warps warp){
 	this->warp = warp;
 	switch(warp){
+	case Warps::Breach:
+		frames[0] = 0x0000FF;
+		frames[1] = 0xFF0000;
+		numFrames=2;
+		frameIntervul=20;
+		break;
 	case Warps::Ten:
 		frames[0] = 0x0000FF;
 		frames[1] = 0x0000FF;
@@ -48,7 +54,7 @@ void WarpCoreManager::SetWarp(Warps warp){
 		frames[3] = 0x0000FF;
 		frames[4] = 0x000044;
 		numFrames=5;
-		frameIntervul = 50;
+		frameIntervul = 25;
 		break;
 	case Warps::Nine:
 		frames[0] = 0x0000FF;
@@ -56,8 +62,10 @@ void WarpCoreManager::SetWarp(Warps warp){
 		frames[2] = 0x0000FF;
 		frames[3] = 0x0000FF;
 		frames[4] = 0x0000FF;
+		frames[5] = 0x0000FF;
+		frames[6] = 0x000055;
 		numFrames=9;
-		for(int i=5;i<numFrames;i++){
+		for(int i=7;i<numFrames;i++){
 			frames[i] = 0;
 		}
 		frameIntervul = 75;
@@ -67,9 +75,10 @@ void WarpCoreManager::SetWarp(Warps warp){
 		frames[1] = 0x0000FF;
 		frames[2] = 0x0000FF;
 		frames[3] = 0x0000FF;
-		frames[4] = 0x000055;
+		frames[4] = 0x0000FF;
+		frames[5] = 0x0000FF;
 		numFrames=TOPRINGS;
-		for(int i=5;i<numFrames;i++){
+		for(int i=6;i<numFrames;i++){
 			frames[i] = 0;
 		}
 		frameIntervul = 75;
@@ -79,8 +88,10 @@ void WarpCoreManager::SetWarp(Warps warp){
 		frames[1] = 0x0000FF;
 		frames[2] = 0x0000FF;
 		frames[3] = 0x0000FF;
+		frames[4] = 0x0000FF;
+		frames[5] = 0x000055;
 		numFrames=TOPRINGS;
-		for(int i=4;i<numFrames;i++){
+		for(int i=6;i<numFrames;i++){
 			frames[i] = 0;
 		}
 		frameIntervul = 75;
@@ -89,9 +100,10 @@ void WarpCoreManager::SetWarp(Warps warp){
 		frames[0] = 0x0000FF;
 		frames[1] = 0x0000FF;
 		frames[2] = 0x0000FF;
-		frames[3] = 0x000055;
+		frames[3] = 0x0000FF;
+		frames[4] = 0x0000FF;
 		numFrames=TOPRINGS;
-		for(int i=4;i<numFrames;i++){
+		for(int i=5;i<numFrames;i++){
 			frames[i] = 0;
 		}
 		frameIntervul = 100;
@@ -100,9 +112,10 @@ void WarpCoreManager::SetWarp(Warps warp){
 		frames[0] = 0x0000FF;
 		frames[1] = 0x0000FF;
 		frames[2] = 0x0000FF;
-		frames[3] = 0x000022;
+		frames[3] = 0x0000FF;
+		frames[4] = 0x000055;
 		numFrames=TOPRINGS;
-		for(int i=4;i<numFrames;i++){
+		for(int i=5;i<numFrames;i++){
 			frames[i] = 0;
 		}
 		frameIntervul = 100;
@@ -111,8 +124,9 @@ void WarpCoreManager::SetWarp(Warps warp){
 		frames[0] = 0x0000FF;
 		frames[1] = 0x0000FF;
 		frames[2] = 0x0000FF;
+		frames[3] = 0x0000FF;
 		numFrames=TOPRINGS;
-		for(int i=3;i<numFrames;i++){
+		for(int i=4;i<numFrames;i++){
 			frames[i] = 0;
 		}
 		frameIntervul = 150;
@@ -120,38 +134,42 @@ void WarpCoreManager::SetWarp(Warps warp){
 	case Warps::Three:
 		frames[0] = 0x0000FF;
 		frames[1] = 0x0000FF;
+		frames[2] = 0x0000FF;
+		frames[3] = 0x000055;
+		numFrames=TOPRINGS;
+		for(int i=4;i<numFrames;i++){
+			frames[i] = 0;
+		}
+		frameIntervul = 200;
+		break;
+	case Warps::Two:
+		frames[0] = 0x0000FF;
+		frames[1] = 0x0000FF;
+		frames[2] = 0x0000FF;
+		numFrames=TOPRINGS;
+		for(int i=3;i<numFrames;i++){
+			frames[i] = 0;
+		}
+		frameIntervul = 300;
+		break;
+	case Warps::One:
+		frames[0] = 0x0000FF;
+		frames[1] = 0x0000FF;
 		frames[2] = 0x000055;
 		numFrames=TOPRINGS;
 		for(int i=3;i<numFrames;i++){
 			frames[i] = 0;
 		}
-		frameIntervul = 150;
+		frameIntervul = 400;
 		break;
-	case Warps::Two:
+	default:
 		frames[0] = 0x0000FF;
 		frames[1] = 0x0000FF;
 		numFrames=TOPRINGS;
 		for(int i=2;i<numFrames;i++){
 			frames[i] = 0;
 		}
-		frameIntervul = 250;
-		break;
-	case Warps::One:
-		frames[0] = 0x0000FF;
-		frames[1] = 0x000055;
-		numFrames=TOPRINGS;
-		for(int i=2;i<numFrames;i++){
-			frames[i] = 0;
-		}
-		frameIntervul = 300;
-		break;
-	default:
-		frames[0] = 0x0000FF;
-		numFrames=TOPRINGS;
-		for(int i=1;i<numFrames;i++){
-			frames[i] = 0;
-		}
-		frameIntervul = 400;
+		frameIntervul = 500;
 		break;
 	}
 }
