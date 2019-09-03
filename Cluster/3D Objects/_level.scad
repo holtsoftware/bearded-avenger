@@ -15,17 +15,17 @@ module levelStandOffHoles()
 
 	#translate([$x,$offEdge,-1]) union()
 	{
-		cylinder(d=piHole(),h=10);
-		translate([$seperation,0,0]) cylinder(d=piHole(),h=10);
-		translate([0,($levelLength-($offEdge*2)),0]) cylinder(d=piHole(),h=10);
-		translate([$seperation,($levelLength-($offEdge*2)),0]) cylinder(d=piHole(),h=10);
+		cylinder(d=piHole()+0.5,h=10);
+		translate([$seperation,0,0]) cylinder(d=piHole()+0.5,h=10);
+		translate([0,($levelLength-($offEdge*2)),0]) cylinder(d=piHole()+0.5,h=10);
+		translate([$seperation,($levelLength-($offEdge*2)),0]) cylinder(d=piHole()+0.5,h=10);
 	}
 }
 
 module piHoles()
 {
-	$xOffset=58;
-	$yOffset=48;
+	$xOffset=58.5;
+	$yOffset=48.5;
 	cylinder(d=piHole(),h=10);
 	translate([$xOffset,0,0]) cylinder(d=piHole(),h=10);
 	translate([0,$yOffset,0]) cylinder(d=piHole(),h=10);
