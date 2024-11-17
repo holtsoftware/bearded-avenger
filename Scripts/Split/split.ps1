@@ -3,7 +3,7 @@ $dataPath = Join-Path $PSScriptRoot -ChildPath data.txt
 
 $lines = Get-Content $dataPath
 
-$files = Get-ChildItem -Path . -Filter *.mp4
+$files = Get-ChildItem -Path *.mkv
 
 if((Test-Path 'scripts') -eq $false)
 {
@@ -11,6 +11,7 @@ if((Test-Path 'scripts') -eq $false)
 }
 
     $notFoundIndex = 0
+    $index = 0;
 
 foreach($file in $files)
 {
@@ -22,15 +23,6 @@ foreach($file in $files)
     $csvContent = Get-Content file.csv
 
 
-    for($i=3;$i -lt $csvContent.Count;$i++)
-    {
-        $name = $file.Name
-        $segments = $csvContent[$i] -split ','
-        $splitAt = $segments[2]
-
-        Set-Content "scripts/$name-$i.sh" -value "#!/bin/bash`nmkvmerge --output /mnt/d/tmp/file.mkv  --language -1:und --language 1:en --language 2:en --split 'timestamps:00:00:06,$splitAt' `"$file`" --track-order 0:0,0:1,0:2"
-
-    }
     $segments = $csvContent[3] -split ','
 
     #$splitAt = New-timespan $segments[2]
@@ -44,96 +36,56 @@ foreach($file in $files)
     }
 
     mkvmerge --output /mnt/d/tmp/file.mkv  --language -1:und --language 1:en --language 2:en --split "timestamps:$sAt" $file --track-order 0:0,0:1,0:2
-    if($LastExitCode -ne 1)
+    if($LastExitCode -ne 0)
     {
         Write-Host "Exit Code" $LastExitCode
         exit(1);
     }
 
-    $segments = $file.Name.Trim('.mp4') -split '-'
+    $segments = $file.Name.Trim('.mp4').Trim('.mkv') -split '-'
     if($segments.Count -eq 3)
     {
+        $first = $segments[0].Trim();
         $found = $false;
         $tofind = (($segments[1] -replace 'the','') -replace '[^a-zA-Z0-9 ]','').ToLower().Trim()
         Write-Host $tofind
-        foreach($line in $lines)
-        {
-            $line = $line -replace '[^a-zA-Z0-9 ]',''
-            if($line.ToLower().Contains($tofind))
-            {
-                $found = $true
-                $p1 = $line.SubString(0, 6).ToLower()
-                $p2 = $line.SubString(7)
-                $l = "$p1 - $p2"
-                $dest = "/mnt/d/tmp/$l.mkv"
-                Move-Item "/mnt/d/tmp/file-001.mkv" $dest
-                Write-Host "Created File" $dest
-                break;
-            }
-        }
+        $item = $segments[1].Trim();
+        $ii = ($index++).ToString("000");
+        $file1 = "/mnt/d/tmp/$first - $ii - $item.mkv"
+        Move-Item "/mnt/d/tmp/file-001.mkv" $file1
+        $item = $segments[2].Trim();
+        $ii = ($index++).ToString("000");
+        $file2 = "/mnt/d/tmp/$first - $ii - $item.mkv"
+        Move-Item "/mnt/d/tmp/file-002.mkv" $file2
 
-        if($found -eq $false)
+        for($i=0;$i -lt $csvContent.Count;$i++)
         {
-            Move-Item "/mnt/d/tmp/file-001.mkv" "/mnt/d/tmp/zz - $notFoundIndex - $tofind.mkv"
-            $notFoundIndex++
-        }
+            $name = $file.Name
+            $segments = $csvContent[$i] -split ','
+            $splitAt = $segments[2]
 
-        $found = $false
-        $tofind = (($segments[2] -replace 'the','') -replace '[^a-zA-Z0-9 ]','').ToLower().Trim()
-        Write-Host $tofind
-        foreach($line in $lines)
-        {
-            $line = $line -replace '[^a-zA-Z0-9 ]',''
-            if($line.ToLower().Contains($tofind))
+            if((Test-Path scripts) -eq $false)
             {
-                $found = $true
-                $p1 = $line.SubString(0, 6).ToLower()
-                $p2 = $line.SubString(7)
-                $l = "$p1 - $p2"
-                $dest = "/mnt/d/tmp/$l.mkv"
-                Move-Item "/mnt/d/tmp/file-002.mkv" $dest
-                Write-Host "Created File" $dest
-                break;
+                mkdir scripts
             }
-        }
-        if($found -eq $false)
-        {
-            Move-Item "/mnt/d/tmp/file-002.mkv" "/mnt/d/tmp/zz - $notFoundIndex - $tofind.mkv"
-            $notFoundIndex++
+
+            Set-Content "scripts/$name-$i.sh" -value "#!/bin/bash`nmkvmerge --output /tmp/file.mkv  --language -1:und --language 1:en --language 2:en --split `"timestamps:$splitAt`" `"$file`" --track-order 0:0,0:1,0:2`nmv -f `"/tmp/file-001.mkv`" `"$file1`"`nmv -f `"/tmp/file-002.mkv`" `"$file2`""
+
         }
     }
     elseif($segments.Count -eq 2)
     {
+        $first = $segments[0].Trim();
         $found = $false;
-        $tofind = (($segments[1] -replace 'the','') -replace '[^a-zA-Z0-9 ]','').ToLower().Trim()
-        Write-Host $tofind
-        foreach($line in $lines)
-        {
-            $line = $line -replace '[^a-zA-Z0-9 ]',''
-            if($line.ToLower().Contains($tofind))
-            {
-                $found = $true
-                $p1 = $line.SubString(0, 6).ToLower()
-                $p2 = $line.SubString(7)
-                $l = "$p1 - $p2"
-                $dest = "/mnt/d/tmp/$l.mkv"
-                mkvmerge --output $dest  --language -1:und --language 1:en --language 2:en $file --track-order 0:0,0:1,0:2
-                #Copy-Item $file $dest
-                Write-Host "Created File" $dest
-                break;
-            }
-        }
-
-        if($found -eq $false)
-        {
-            $dest = "/mnt/d/tmp/zz - $notFoundIndex - $tofind.mkv"
-            mkvmerge --output $dest  --language -1:und --language 1:en --language 2:en $file --track-order 0:0,0:1,0:2
-            $notFoundIndex++
-        }
+        $item = $segments[1];
+        $ii = ($index++).ToString("000");
+        $dest = "/mnt/d/tmp/$first - $ii - $item.mkv"
+        mkvmerge --output $dest  --language -1:und --language 1:en --language 2:en $file --track-order 0:0,0:1,0:2
     }
     else
     {
-        Write-Host "Unsure about file" $file.Name
-        exit(1);
+        $item = $file.Name
+        $dest = "/mnt/d/tmp/$ii - Cannot Split - $item.mkv"
+        mkvmerge --output $dest  --language -1:und --language 1:en --language 2:en $file --track-order 0:0,0:1,0:2
     }
 }
