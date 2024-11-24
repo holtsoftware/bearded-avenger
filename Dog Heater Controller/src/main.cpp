@@ -42,7 +42,7 @@ void setup()
 	server.init();
 
 	// Start a background task using Ticker (e.g., blink LED every 1 second)
-	backgroundTask.attach(3, checkTemp);
+	backgroundTask.attach(30, checkTemp);
 }
 
 void checkTemp()
